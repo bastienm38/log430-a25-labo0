@@ -11,3 +11,11 @@ def test_app():
     assert my_calculator.get_hello_message() == "== Calculatrice v1.0 =="
 
 # TODO: ajoutez les tests
+def test_addition():
+    my_calculator = Calculator()
+    assert my_calculator.addition(2, 3) == 5
+
+#Ce test est censé échouer
+def test_addition_fail():
+    my_calculator = Calculator()
+    assert my_calculator.addition(5, 3) == 38

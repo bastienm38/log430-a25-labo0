@@ -6,22 +6,22 @@ Bastien Mallet
 
 ```
 ===================================================================== FAILURES =====================================================================
-_____________________________________________________________________ test_app _____________________________________________________________________
+________________________________________________________________ test_addition_fail ________________________________________________________________
 
-    def test_app():
+    def test_addition_fail():
         my_calculator = Calculator()
->       assert my_calculator.get_hello_message() == "Calculatrice"
-E       AssertionError: assert '== Calculatrice v1.0 ==' == 'Calculatrice'
-E         
-E         - Calculatrice
-E         + == Calculatrice v1.0 ==
+>       assert my_calculator.addition(5, 3) == 38
+E       assert 8 == 38
+E        +  where 8 = addition(5, 3)
+E        +    where addition = <calculator.Calculator object at 0x7f5a08673390>.addition
 
-src/tests/test_calculator.py:11: AssertionError
+src/tests/test_calculator.py:21: AssertionError
 ============================================================= short test summary info ==============================================================
-FAILED src/tests/test_calculator.py::test_app - AssertionError: assert '== Calculatrice v1.0 ==' == 'Calculatrice'
+FAILED src/tests/test_calculator.py::test_addition_fail - assert 8 == 38
 ```
 
 La ligne où le test échoue est indiquée avec l'erreur pour laquelle le test a échoué.
 
-Ici, le test `test_app()` échoue car la fonction `get_hello_message()` renvoie `== Calculatrice v1.0 ==` et non `Calculatrice`.
+Ici, le test `addition_fail()` échoue volontairement car la fonction `addition(5,3)` renvoie 8 alors que le résultat 
+attendu, qui est volontairement erroné, est de 38.
 
