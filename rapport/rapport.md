@@ -25,3 +25,5 @@ La ligne où le test échoue est indiquée avec l'erreur pour laquelle le test a
 Ici, le test `addition_fail()` échoue volontairement car la fonction `addition(5,3)` renvoie 8 alors que le résultat 
 attendu, qui est volontairement erroné, est de 38.
 
+
+
