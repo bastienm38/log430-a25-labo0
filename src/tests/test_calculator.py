@@ -16,6 +16,6 @@ def test_addition():
     assert my_calculator.addition(2, 3) == 5
 
 #Ce test est censé échouer
-def test_addition_fail():
-    my_calculator = Calculator()
-    assert my_calculator.addition(5, 3) == 38
+#def test_addition_fail():
+#    my_calculator = Calculator()
+#    assert my_calculator.addition(5, 3) == 38
