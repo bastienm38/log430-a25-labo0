@@ -50,4 +50,3 @@ if __name__ == "__main__":
         is_running = int(input("Voulez-vous faire une autre addition ? [1 = Oui | 2 = Non] : "))
 
     print("Au revoir :)")
-    print("test")
