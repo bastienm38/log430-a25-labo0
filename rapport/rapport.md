@@ -27,7 +27,7 @@ attendu, qui est volontairement erroné, est de 38.
 
 2.
 
-Le workflow défini dans `.github/workflows/ci.yml` est exécuté à chaque push et à chaque pull request.
+Le workflow défini dans `.github/workflows/cicd.yml` est exécuté à chaque push et à chaque pull request.
 
 Voici les différentes étapes du workflow dans GitHub Actions de CI : 
 
@@ -164,13 +164,31 @@ tests/test_calculator.py ..                                              [100%]
 Pour automatiser le déploiement vers la machine virtuelle, il faut préalablement installer Docker sur la VM afin que cette 
 dernière puisse run un container Docker qui lance le script Python de la calculatrice.
 
-Il faut également générer une clé SSH permettant de se connecter à la VM en SSH. Celle-ci sera utilisée par le runner Github pour qu'il puisse se connecter.
+Pour automatiser le déploiement, j'ai utilisé un runner Github self-hosted sur la VM.
 
-Dans GitHub Actions, le workflow doit
-- Récupérer l'ensemble des fichiers du repository
-- Se connecter en ssh à la VM
-- Copier les fichiers dans la VM
-- Build l'image Docker
+Le workflow de CD est ainsi exécuté directement sur la VM.
+
+Le job deploy va ainsi : 
+- copier le contenu du repository github sur la VM
+- Arrêter les containers docker en cours d'exécution
+- Build les images Docker
+- Démarrer les containers avec Docker Compose
+
+```yml
+  deploy:
+    runs-on: self-hosted
+    needs: test   # Démarre seulement si les tests passent
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Deploiement avec Docker Compose
+        run: |
+          cd $GITHUB_WORKSPACE
+          docker compose down || true
+          docker compose build --no-cache
+          docker compose up -d
+```
 
 4.
 
